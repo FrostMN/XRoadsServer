@@ -1,0 +1,4 @@
+bcrypt
+MySQLdb
+flask_api
+flask

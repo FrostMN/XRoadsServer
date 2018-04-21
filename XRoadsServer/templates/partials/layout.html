@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ config["TITLE"] }}</title>
+    {% include 'partials/header_includes.html' %}
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    {% include 'partials/navbar.html' %}
+    {% block body %}
+    {% endblock %}
+</body>
+</html>

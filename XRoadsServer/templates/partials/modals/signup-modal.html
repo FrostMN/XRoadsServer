@@ -1,0 +1,25 @@
+<!-- Modal -->
+<div class="modal fade" id="SignUpModal" tabindex="-1" role="dialog" aria-labelledby="SignUpModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">{{ config["TITLE"] }} Sign Up</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url_for("users.create") }}" method="POST" id="create-user">
+                    <input type="text" name="user_name" placeholder="user name"><br>
+                    <input type="text" name="first" placeholder="first name"><br>
+                    <input type="text" name="last" placeholder="last name"><br>
+                    <input type="email"  name="email" placeholder="email"><br>
+                    <input type="text"  name="password" placeholder="password"><br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" form="create-user">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</div>

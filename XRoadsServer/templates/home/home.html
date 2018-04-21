@@ -1,0 +1,27 @@
+{% extends 'partials/layout.html' %}
+{% block head %}
+{% endblock %}
+{% block body %}
+    User:
+    {% if session["user_name"] %}
+     {{ session["user_name"] }}
+    {% else %}
+    {% endif %}
+    <br>
+    Logged In:
+    {% if session["logged_in"] %}
+        True
+    {% else %}
+        False
+    {% endif %}
+    <br>
+{#    {{ session.keys() }}#}
+
+    {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endwith %}
+
+{% endblock %}
+
