@@ -5,11 +5,13 @@ from flask_api import status
 from XRoadsServer.views import home
 from XRoadsServer.views import users
 from XRoadsServer.views import mobile
+from XRoadsServer.views import game
 
 # register blueprints
 app.register_blueprint(home.mod)
 app.register_blueprint(users.mod, url_prefix='/user')
 app.register_blueprint(mobile.mod, url_prefix='/mobile')
+app.register_blueprint(game.mod, url_prefix='/game')
 
 
 @app.errorhandler(404)
@@ -19,5 +21,5 @@ def page_not_found(e):
 
 if __name__ == '__main__':
     # app.config["DEBUG"] = False
-    app.run(host="0.0.0.0")
-    # app.run()
+    # app.run(host="0.0.0.0")
+    app.run()

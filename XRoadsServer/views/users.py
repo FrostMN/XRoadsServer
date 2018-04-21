@@ -7,7 +7,7 @@ mod = Blueprint('users', __name__)
 
 @mod.route('/')
 def user():
-    return render_template("users/users.html")
+    return render_template("users/game.html")
 
 
 @mod.route('/create', methods=['GET', 'POST'])
