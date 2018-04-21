@@ -1,6 +1,126 @@
 {% extends 'partials/layout.html' %}
+
 {% block head %}
+<!-- Custom styles for this template -->
+<link href="{{ url_for('static', filename='css/grid.css') }}" rel="stylesheet">
 {% endblock %}
+
 {% block body %}
-    game
+<div class="container">
+    <div class="row">
+        <div class="col-7">
+            <div class="row">
+                <div class="col-3">
+                    <img class="avatar" src="{{ url_for('static', filename='img/player.png') }}">
+                </div>
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col-6">Character Name</div>
+                        <div class="col-6">Player Name</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">Weapon AIM (aim)<br>PBR/C/M/L Lethality(leath)</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">Graze (dmg)</div>
+                        <div class="col-4">Normal (dmg)</div>
+                        <div class="col-4">Critical (dmg)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="row">
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-12">Defender Name</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">Defence ()</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">Dodge ()</div>
+                    </div>
+{#                    Defender Name<br>Defence ()<br>Dodge ()#}
+                </div>
+                <div class="col-4">
+                    <img class="avatar" src="{{ url_for('static', filename='img/enemy.png') }}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-2">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rangeModal">Range</button>
+        </div>
+        <div class="col-2">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#elevationModal">Elevation</button>
+        </div>
+        <div class="col-2">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#attackerStatusModal">Attacker Status</button>
+        </div>
+        <div class="col-3">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#coverModal">Cover</button>
+        </div>
+        <div class="col-3">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#defenderStatusModal">Defender Status</button>
+        </div>
+{#        <div class="col-2">.col-4</div>#}
+    </div>
+
+    <div class="row">
+
+        <div class="col-8">
+            <div class="row">
+                <div class="col-4">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#abilityModal">Applicable Ability</button>
+                </div>
+                <div class="col-4">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#externalModal">External Bonus</button>
+                </div>
+                <div class="col-4">Attack</div>
+            </div>
+            <div class="row">
+                <div class="col-12">Attack Summary</div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="row">
+                <div class="col-8">
+                    Critical Hit
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-12">5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- /container -->
+    {% with modal_title = 'Range', modal_id = 'range' %}
+        {% include 'game/modals/range.html' %}
+    {% endwith %}
+    {% with modal_title = 'Elevation', modal_id = 'elevation' %}
+        {% include 'game/modals/elevation.html' %}
+    {% endwith %}
+    {% with modal_title = 'Attacker', modal_id = 'attackerStatus' %}
+        {% include 'game/modals/attacker.html' %}
+    {% endwith %}
+    {% with modal_title = 'Cover', modal_id = 'cover' %}
+        {% include 'game/modals/cover.html' %}
+    {% endwith %}
+    {% with modal_title = 'Defender', modal_id = 'defenderStatus' %}
+        {% include 'game/modals/defender.html' %}
+    {% endwith %}
+    {% with modal_title = 'Ability', modal_id = 'ability' %}
+        {% include 'game/modals/ability.html' %}
+    {% endwith %}
+    {% with modal_title = 'External', modal_id = 'external' %}
+        {% include 'game/modals/external.html' %}
+    {% endwith %}
+
 {% endblock %}
