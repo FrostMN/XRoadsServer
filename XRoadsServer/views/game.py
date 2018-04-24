@@ -4,7 +4,7 @@ from XRoadsServer.models.Character import Player
 from XRoadsServer.models.Utilities import *
 from XRoadsServer.models.Weapons import *
 from XRoadsServer.models.Backgrounds import *
-from flask_api import status
+# from flask_api import status
 
 mod = Blueprint('game', __name__)
 
@@ -37,3 +37,8 @@ def game_ko():
     player_thr = Player(Scientist(), player_name="Mike Lubke", character_name="Kaine",
                         primary_weapon=Shotgun())
     return render_template('game/game_ko.html', players=[player_one, player_two, player_thr])
+
+
+@mod.route('/ko2')
+def game_ko2():
+    return render_template('game/game_ko2.html')

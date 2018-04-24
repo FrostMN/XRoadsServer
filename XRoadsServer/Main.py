@@ -1,15 +1,15 @@
 from XRoadsServer.application import app
 from flask import render_template
-from flask_api import status
+# from flask_api import status
 
 from XRoadsServer.views import home
-from XRoadsServer.views import users
+#from XRoadsServer.views import users
 from XRoadsServer.views import mobile
 from XRoadsServer.views import game
 
 # register blueprints
 app.register_blueprint(home.mod)
-app.register_blueprint(users.mod, url_prefix='/user')
+# app.register_blueprint(users.mod, url_prefix='/user')
 app.register_blueprint(mobile.mod, url_prefix='/mobile')
 app.register_blueprint(game.mod, url_prefix='/game')
 

@@ -1,0 +1,106 @@
+{% extends 'partials/layout.html' %}
+
+{% block head %}
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='css/grid.css') }}" rel="stylesheet">
+
+    <!-- Include for KnockoutJS -->
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+
+
+{% endblock %}
+
+{% block body %}
+
+    <span data-bind="text: selectedPlayer() ? selectedPlayer().character_class : 'unknown'"></span>
+    <br>
+
+    <select data-bind="options: $root.players,
+            value: selectedPlayer,
+            optionsText: 'player_name'"></select>
+
+    <br>
+    <span data-bind="text: selectedPlayer() ? selectedPlayer().character_name : 'unknown'"></span>.
+    <br>
+
+
+
+
+<script>
+
+    var assault = {name: "Assault Rifle", dam: 4, crit: 2, lethal: 0, clip: 4, point_b: 30, srt: 15, med: 0, lng: -15};
+    var arc_throw = {name: "Arc Thrower", dam: 4, crit: 2, lethal: 0, clip: 4, point_b: 30, srt: 15, med: 0, lng: -15};
+
+    var player_one_stats = {aim: 55, defence: 10, dodge: 10, will: 90, hacking: 5, health: 3, mobility: 6};
+    var player_one_class = {name: "Assault", damage: 4};
+    var player_one = {player_name:"Aaron Souer", character_name:"Drake", stats: player_one_stats, rank: 1,
+        weapons: [assault, arc_throw], utilities: [], character_class: player_one_class, id: 0};
+
+
+{#    var assault = {name: "Assault Rifle", dam: 4, crit: 2, lethal: 0, clip: 4, point_b: 30, srt: 15, med: 0, lng: -15};#}
+{#    var arc_throw = {name: "Arc Thrower", dam: 4, crit: 2, lethal: 0, clip: 4, point_b: 30, srt: 15, med: 0, lng: -15};#}
+
+    var player_two_stats = {aim: 55, defence: 10, dodge: 10, will: 90, hacking: 5, health: 3, mobility: 6};
+    var player_two_class = {name: "Sharpshooter", damage: 4};
+    var player_two = {player_name:"Willson Borchert", character_name:"Spyndri", stats: player_two_stats, rank: 1,
+        weapons: [assault, arc_throw], utilities: [], character_class: player_two_class, id: 1};
+
+
+
+    function Player(player_json) {
+        var self = this;
+
+        self.id = player_json["id"];
+
+        self.player_name = player_json["player_name"];
+        self.character_name = player_json["character_name"];
+        self.character_class = ko.observable(player_json["character_class"]["name"]);
+        self.rank = player_json["rank"];
+
+        self.aim = player_json["stats"]["aim"];
+        self.defence = player_json["stats"]["defence"];
+        self.dodge = player_json["stats"]["dodge"];
+        self.will = player_json["stats"]["will"];
+        self.hacking = player_json["stats"]["hacking"];
+        self.health = player_json["stats"]["health"];
+        self.mobility = player_json["stats"]["mobility"];
+
+        self.weapons = [];
+        for ( var weapon_json in player_json["weapons"] ) {
+            self.weapons.push(new Weapon(weapon_json))
+        }
+    }
+
+
+    function Weapon(weapon_json) {
+        var self = this;
+        self.name = weapon_json["name"];
+
+        self.damage = weapon_json["dam"];
+        self.critical = weapon_json["crit"];
+        self.lethality = weapon_json["lethal"];
+        self.clip = weapon_json["clip"];
+        self.point_blank = weapon_json["point_b"];
+        self.short = weapon_json["srt"];
+        self.medium = weapon_json["med"];
+        self.long = weapon_json["lng"];
+    }
+
+    function GameViewModel() {
+        var self = this;
+        self.players = ko.observableArray(
+            [new Player(player_one),
+             new Player(player_two)]);
+
+        self.selectedPlayer = ko.observable();
+        {#self.showPlayer = function(player) { self.chosenPlayer(player); };#}
+
+
+        self.enemies = ko.observableArray([]);
+    }
+
+    ko.applyBindings(new GameViewModel());
+
+</script>
+
+{% endblock %}
