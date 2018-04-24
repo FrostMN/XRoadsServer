@@ -22,7 +22,7 @@
 
                     <div class="form-group">
                         <label for="characterName">Class:</label>
-                        <input type="text" readonly class="form-control-plaintext" id="characterClass" value="{{ players[0].character_class }}">
+{#                        <input type="text" readonly class="form-control-plaintext" id="characterClass" data-bind="value: selectedPlayer().character_class">#}
                     </div>
 
 
@@ -34,19 +34,22 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="characterName">Character Name:</label>
-{#                                <div class="col-sm-10">#}
-                                    <input type="text" readonly class="form-control-plaintext" id="characterName" value="{{ players[0].character_name }}">
-{#                                </div>#}
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="characterName" data-bind="text: players[0].player_name">
+                                </div>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="attackersList">Player Name:</label>
-                                <select class="form-control" id="attackersList">
-                                    {% for player in players %}
-                                        <option>{{ player.player_name }}</option>
-                                    {% endfor %}
-                                </select>
+{#                                <select data-bind="options: $root.players, value: player_name, optionsText: 'player_name'"></select>#}
+                                <select data-bind="options: $root.players,
+                                                    value: name,
+                                                    optionsText: 'player_name',
+                                                    optionsValue: 'id'"></select>
+{#                                <select data-bind="foreach: players">#}
+{#                                    <option><span data-bind="value: player_name"></span></option>#}
+{#                                </select>#}
                             </div>
                         </div>
                     </div>

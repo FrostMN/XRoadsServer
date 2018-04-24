@@ -1,17 +1,17 @@
-from enum import Enum
+from enum import Enum, IntEnum
 import itertools
 
 
-class Rank(Enum):
-    Rookie = 0
-    Squaddie = 1
-    LanceCorporal = 2
-    Corporal = 3
-    Sergeant = 4
-    StaffSergeant = 5
-    TechSergeant = 6
-    GunnerySergeant = 7
-    MasterSergeant = 8
+class Rank(IntEnum):
+    Rookie:           int = 0
+    Squaddie:         int = 1
+    LanceCorporal:    int = 2
+    Corporal:         int = 3
+    Sergeant:         int = 4
+    StaffSergeant:    int = 5
+    TechSergeant:     int = 6
+    GunnerySergeant:  int = 7
+    MasterSergeant:   int = 8
 
 
 class RankTest(Enum):

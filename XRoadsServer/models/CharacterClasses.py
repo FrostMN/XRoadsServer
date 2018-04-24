@@ -1,10 +1,13 @@
-from XRoadsServer.models.Ranks import Rank
 import math
+
+from XRoadsServer.enums.Ranks import Rank
+from XRoadsServer.models.Weapons import *
 
 
 class CharacterClass(object):
 
-    _name = "Untrained"
+    _name:    str = "Untrained"
+    _sidearm: Sidearm = Sidearm()
 
     def __str__(self) -> str:
         return self._name
@@ -76,10 +79,19 @@ class CharacterClass(object):
     def _specialist_hack(self, rank: Rank):
         return (5 * rank.value) + 35
 
+    @property
+    def sidearm(self):
+        return self._sidearm
+
+    @property
+    def name(self):
+        return self._name
+
 
 class Assault(CharacterClass):
 
     _name = "Assault"
+    _sidearm = ArcThrower()
 
     def get_health_mod(self, rank: Rank):
         return super()._health_fast(rank)
@@ -101,6 +113,7 @@ class Assault(CharacterClass):
 class Grenadier(CharacterClass):
 
     _name = "Grenadier"
+    _sidearm = GrenadeLauncher()
 
     def get_health_mod(self, rank: Rank):
         return super()._health_fast(rank)
@@ -122,6 +135,7 @@ class Grenadier(CharacterClass):
 class Gunner(CharacterClass):
 
     _name = "Gunner"
+    _sidearm = CombatKnife()
 
     def get_health_mod(self, rank: Rank):
         return super()._health_fast(rank)
@@ -143,6 +157,7 @@ class Gunner(CharacterClass):
 class Ranger(CharacterClass):
 
     _name = "Ranger"
+    _sidearm = SawedOffShotgun()
 
     def get_health_mod(self, rank: Rank):
         return super()._health_fast(rank)
@@ -164,6 +179,7 @@ class Ranger(CharacterClass):
 class Sharpshooter(CharacterClass):
 
     _name = "Sharpshooter"
+    _sidearm = Holotargeter()
 
     def get_health_mod(self, rank: Rank):
         return super()._health_slow(rank)
@@ -185,6 +201,7 @@ class Sharpshooter(CharacterClass):
 class Shinobi(CharacterClass):
 
     _name = "Shinobi"
+    _sidearm = Sword()
 
     def get_health_mod(self, rank: Rank):
         return super()._health_slow(rank)
@@ -205,6 +222,7 @@ class Shinobi(CharacterClass):
 class Specialist(CharacterClass):
 
     _name = "Specialist"
+    _sidearm = Gremlin()
 
     def get_health_mod(self, rank: Rank):
         return super()._health_fast(rank)
@@ -221,6 +239,28 @@ class Specialist(CharacterClass):
 
     def get_hack_mod(self, rank: Rank):
         return super()._specialist_hack(rank)
+
+
+class Technical(CharacterClass):
+
+    _name = "Technical"
+    _sidearm = Gauntlet()
+
+    def get_health_mod(self, rank: Rank):
+        return super()._health_fast(rank)
+
+    def get_offence_mod(self, rank: Rank):
+        return super()._offence_fast(rank)
+
+    def get_will_mod(self, rank: Rank):
+        return super()._will_normal(rank)
+
+    """ can remove nex override """
+    def get_dodge_mod(self, rank: Rank):
+        return super().get_dodge_mod(rank)
+
+    def get_hack_mod(self, rank: Rank):
+        return super().get_hack_mod(rank)
 
 
 if __name__ == '__main__':
