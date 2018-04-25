@@ -42,3 +42,22 @@ def game_ko():
 @mod.route('/ko2')
 def game_ko2():
     return render_template('game/game_ko2.html')
+
+
+@mod.route('/ko2/api')
+def game_ko_api():
+
+    player_one = Player(Athlete(), player_name="Aaron Souer", character_name="Drake",
+                        primary_weapon=AssaultRifle(), utility=[AblativePlating()])
+
+    player_one.rank_up()
+    player_one.set_character_class(Assault())
+
+    player_two = Player(Scientist(), player_name="Willson Borchert", character_name="Spyndri",
+                        primary_weapon=Shotgun())
+    player_thr = Player(Scientist(), player_name="Mike Lubke", character_name="Kaine",
+                        primary_weapon=Shotgun())
+
+    game_data = {"players": [player_one.to_dict(), player_two.to_dict()]} #, player_thr.to_json()]}
+
+    return jsonify(game_data)

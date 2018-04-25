@@ -162,25 +162,30 @@ class Player(object):
         else:
             return string
 
-    def jsonify(self):
+    def to_dict(self):
 
         weapons = []
         utilities = []
 
         for weapon in self._weapons:
-            weapons.append(weapon.name)
+            weapons.append(weapon.to_dict())
 
         for item in self._utility:
-            utilities.append(item.name)
+            utilities.append(item.to_dict())
 
         stats = {"aim": self._aim, "defence": self._defence, "dodge": self._dodge, "will": self._will,
                  "hacking": self._hacking, "health": self._health, "mobility": self._mobility}
 
+        if self._class:
+            character_class = self._class.name
+        else:
+            character_class = "Untrained"
+
         player_dict = {"player_name": self.player_name, "character_name": self._character_name,
-                       "rank": self._rank.value, "background": self._background.name, "class": self._class.name,
+                       "rank": self._rank.value, "background": self._background.name, "class": character_class,
                        "weapons": weapons, "items": utilities, "stats": stats}
         # return to_json(player_dict)
-        return json.dumps(player_dict)
+        return player_dict
 
 
 """Actions"""

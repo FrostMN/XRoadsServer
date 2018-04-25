@@ -11,41 +11,172 @@
 {% endblock %}
 
 {% block body %}
+    <div class="container">
+    <div class="row">
+        <div class="col">
+            <button data-bind="click: $root.do_attack">attack</button>
+            <label>Roll:</label> <input data-bind="textInput: $root.attack_roll()" size="4" readonly> |
+            <label>Type: </label> <input data-bind="textInput: $root.hit_type()" readonly>
+        </div>
+    </div>
 
-    <span data-bind="text: selectedPlayer() ? selectedPlayer().character_class : 'unknown'"></span>
+
+    <div class="row">
+
+    <div class="col">
+
+    <label for="character_class">Character Class: </label>
+    <input id="character_class" data-bind="textInput: selectedPlayer() ? selectedPlayer().class_name : 'unknown'" readonly>
     <br>
 
-    <select data-bind="options: $root.players,
-            value: selectedPlayer,
-            optionsText: 'player_name'"></select>
+    <label for="player_name">Player Name: </label>
+    <select id="player_name" data-bind="options: $root.players,
+                                    value: selectedPlayer,
+                                    optionsText: 'player_name'"></select>
 
     <br>
-    <span data-bind="text: selectedPlayer() ? selectedPlayer().character_name : 'unknown'"></span>.
+    <label for="character_name">Character Name: </label>
+    <input id="character_name" data-bind="textInput: selectedPlayer() ? selectedPlayer().character_name : 'unknown'" readonly>
     <br>
 
 
+    <label for="selected_weapon">Character Class: </label>
+    <select id="selected_weapon" data-bind="options: selectedPlayer() ? selectedPlayer().weapons : 'None',
+                                       value: selectedWeapon,
+                                       optionsText: 'name'"></select>
+
+    <br>
+    <label for="character_aim">Aim: </label>
+    <input id="character_aim" data-bind="textInput: attacker_aim" readonly>
+    <br>
+    <label for="character_aim">Lethality: </label>
+    <input id="character_aim" data-bind="textInput: weapon_lethality" readonly>
+    <br>
+    <label for="character_aim">Graze: </label>
+    <input id="character_aim" data-bind="textInput: graze_hit" readonly>
+    <br>
+    <label for="character_aim">Normal: </label>
+    <input id="character_aim" data-bind="textInput: normal_hit" readonly>
+    <br>
+    <label for="character_aim">Critical: </label>
+    <input id="character_aim" data-bind="textInput: critical_hit" readonly>
+    <br>
+
+    <br>
+    <label for="p_stat">PBR</label>/<label for="c_stat">C</label>/<label for="m_stat">M</label>/<label for="l_stat">L</label>:<br>
+    <input id="p_stat" data-bind="textInput: selectedWeapon() ? selectedWeapon().point_blank : 'unknown'" size="4" readonly>/
+    <input id="c_stat" data-bind="textInput: selectedWeapon() ? selectedWeapon().short : 'unknown'" size="4" readonly>/
+    <input id="m_stat" data-bind="textInput: selectedWeapon() ? selectedWeapon().medium : 'unknown'" size="4" readonly>/
+    <input id="l_stat" data-bind="textInput: selectedWeapon() ? selectedWeapon().long : 'unknown'" size="4" readonly>
+    <br>
+
+    <br>
+    <label for="attacker_range">Range: </label>
+{#        <span data-bind="text: selectedRange"></span>#}
+                                               <span data-bind="text: selectedPlayer().range"></span><br>
+    <input type="radio" name="rangeGroup" value="0" data-bind="checked: selectedPlayer().range" /> Point Blank
+    <input type="radio" name="rangeGroup" value="1" data-bind="checked: selectedPlayer().range" /> Close
+    <input type="radio" name="rangeGroup" value="2" data-bind="checked: selectedPlayer().range" /> Medium
+    <input type="radio" name="rangeGroup" value="3" data-bind="checked: selectedPlayer().range" /> Long
+{#    <input type="radio" name="rangeGroup" value="0" data-bind="checked: selectedRange" /> Point Blank#}
+{#    <input type="radio" name="rangeGroup" value="1" data-bind="checked: selectedRange" /> Close#}
+{#    <input type="radio" name="rangeGroup" value="2" data-bind="checked: selectedRange" /> Medium#}
+{#    <input type="radio" name="rangeGroup" value="3" data-bind="checked: selectedRange" /> Long#}
+    <br>
+
+    <label for="attacker_elevation">Elevation: </label> <span data-bind="text: selectedPlayer().elevation"></span><br>
+    <input type="radio" name="elevationGroup" value="0" data-bind="checked: selectedPlayer().elevation" /> Low
+    <input type="radio" name="elevationGroup" value="1" data-bind="checked: selectedPlayer().elevation" /> Even
+    <input type="radio" name="elevationGroup" value="2" data-bind="checked: selectedPlayer().elevation" /> High
+{#    <input type="radio" name="elevationGroup" value="0" data-bind="checked: selectedElevation" /> Low#}
+{#    <input type="radio" name="elevationGroup" value="1" data-bind="checked: selectedElevation" /> Even#}
+{#    <input type="radio" name="elevationGroup" value="2" data-bind="checked: selectedElevation" /> High#}
+    <br>
+
+{#        status#}
+
+    <label for="attacker_status">Attacker Status: </label> <span data-bind="text: selectedPlayer().attack_status"></span><br>
+    <input type="checkbox" name="selectedAttackerGroup" value="0" data-bind="checked: selectedPlayer().attack_status" /> Buff 1
+    <input type="checkbox" name="selectedAttackerGroup" value="1" data-bind="checked: selectedPlayer().attack_status" /> Buff 2
+    <input type="checkbox" name="selectedAttackerGroup" value="2" data-bind="checked: selectedPlayer().attack_status" /> DeBuff 1
+    <input type="checkbox" name="selectedAttackerGroup" value="3" data-bind="checked: selectedPlayer().attack_status" /> DeBuff 2
+{#    <input type="checkbox" name="selectedAttackerGroup" value="0" data-bind="checked: selectedAttackerStatus" /> Buff 1#}
+{#    <input type="checkbox" name="selectedAttackerGroup" value="1" data-bind="checked: selectedAttackerStatus" /> Buff 2#}
+{#    <input type="checkbox" name="selectedAttackerGroup" value="2" data-bind="checked: selectedAttackerStatus" /> DeBuff 1#}
+{#    <input type="checkbox" name="selectedAttackerGroup" value="3" data-bind="checked: selectedAttackerStatus" /> DeBuff 2#}
+    <br>
 
 
+    </div>
+    <div class="col"> <!-- defender column -->
+
+    <label for="player_name">Defender Name: </label>
+    <select id="player_name" data-bind="options: $root.enemies,
+                                    value: selectedDefender,
+                                    optionsText: 'player_name'"></select><br>
+
+    <label for="character_aim">Defence: </label>
+    <input id="character_aim" data-bind="textInput: defender_defense" readonly>
+    <br>
+    <label for="character_aim">Dodge: </label>
+    <input id="character_aim" data-bind="textInput: defender_dodge" readonly>
+    <br>
+
+
+    <label for="defender_cover">Defender Cover: </label> <span data-bind="text: selectedDefender().cover"></span><br>
+    <input type="radio" name="defenderCoverGroup" value="0" data-bind="checked: selectedDefender().cover" /> None
+    <input type="radio" name="defenderCoverGroup" value="1" data-bind="checked: selectedDefender().cover" /> Partial
+    <input type="radio" name="defenderCoverGroup" value="2" data-bind="checked: selectedDefender().cover" /> Full
+    <br>
+
+    <label for="defender_status">Defender Status: </label> <span data-bind="text: selectedDefender().defense_status"></span><br>
+    <input type="checkbox" name="selectedDefenderGroup" value="0" data-bind="checked: selectedDefender().defense_status" /> Buff 1
+    <input type="checkbox" name="selectedDefenderGroup" value="1" data-bind="checked: selectedDefender().defense_status" /> Buff 2
+    <input type="checkbox" name="selectedDefenderGroup" value="2" data-bind="checked: selectedDefender().defense_status" /> DeBuff 1
+    <input type="checkbox" name="selectedDefenderGroup" value="3" data-bind="checked: selectedDefender().defense_status" /> DeBuff 2
+    <br>
+
+
+    </div> <!-- defender column end -->
+
+    </div> <!-- <div> row end -->
+    </div> <!-- <div> container end -->
 <script>
 
-    var assault = {name: "Assault Rifle", dam: 4, crit: 2, lethal: 0, clip: 4, point_b: 30, srt: 15, med: 0, lng: -15};
-    var arc_throw = {name: "Arc Thrower", dam: 4, crit: 2, lethal: 0, clip: 4, point_b: 30, srt: 15, med: 0, lng: -15};
+    var assault = {name: "Assault Rifle", dam: 4, crit: 2, lethal: 0, clip: 4, point_b: 30,
+        srt: 15, med: 0, lng: -15, aim_bonus: 0};
+    var sniper_rifle = {name: "Sniper Rifle", dam: 5, crit: 2, lethal: 10, clip: 3, point_b: -30,
+        srt: -15, med: 0, lng: 0, aim_bonus: 0};
 
-    var player_one_stats = {aim: 55, defence: 10, dodge: 10, will: 90, hacking: 5, health: 3, mobility: 6};
-    var player_one_class = {name: "Assault", damage: 4};
+    var arc_throw = {name: "Arc Thrower", dam: 0, crit: 0, lethal: 0, clip: 0, point_b: 30,
+        srt: 15, med: 0, lng: -15, aim_bonus: 0};
+    var holotargeter = {name: "Holotargeter", dam: 0, crit: 0, lethal: 0, clip: 0, point_b: "-",
+        srt: "-", med: "-", lng: "-", aim_bonus: 0};
+
+    var player_one_stats = {aim: 65, defence: 0, dodge: 5, will: 95, hacking: 5, health: 4, mobility: 5};
+    var player_one_class = {name: "Assault", health: 0, aim: 2, will: 5, dodge: 0, hacking: 0};
     var player_one = {player_name:"Aaron Souer", character_name:"Drake", stats: player_one_stats, rank: 1,
-        weapons: [assault, arc_throw], utilities: [], character_class: player_one_class, id: 0};
+        rank_name: "Squaddie", weapons: [assault, arc_throw], utilities: [], character_class: player_one_class,
+        id: 0, background: "Resistance"};
 
-
-{#    var assault = {name: "Assault Rifle", dam: 4, crit: 2, lethal: 0, clip: 4, point_b: 30, srt: 15, med: 0, lng: -15};#}
-{#    var arc_throw = {name: "Arc Thrower", dam: 4, crit: 2, lethal: 0, clip: 4, point_b: 30, srt: 15, med: 0, lng: -15};#}
 
     var player_two_stats = {aim: 55, defence: 10, dodge: 10, will: 90, hacking: 5, health: 3, mobility: 6};
-    var player_two_class = {name: "Sharpshooter", damage: 4};
-    var player_two = {player_name:"Willson Borchert", character_name:"Spyndri", stats: player_two_stats, rank: 1,
-        weapons: [assault, arc_throw], utilities: [], character_class: player_two_class, id: 1};
+    var player_two_class = {name: "Sharpshooter", health: 0, aim: 7, will: 3, dodge: 0, hacking: 0};
+    var player_two = {player_name: "Willson Borchert", character_name: "Spyndri", stats: player_two_stats, rank: 1,
+        rank_name: "Squaddie", weapons: [sniper_rifle, holotargeter], utilities: [], character_class: player_two_class,
+        id: 1, background: "Scavenger"};
 
+    var enemy_one_stats = {aim: 55, defence: 10, dodge: 10, will: 90, hacking: 5, health: 3, mobility: 6};
+    var enemy_one_class = {name: "Trooper", health: 0, aim: 7, will: 3, dodge: 0, hacking: 0};
+    var enemy_one = {player_name: "Trooper A", character_name: "Trooper", stats: enemy_one_stats, rank: 1,
+        rank_name: "basic", weapons: [assault], utilities: [], character_class: enemy_one_class,
+        id: 2, background: ""};
 
+    var enemy_two_stats = {aim: 55, defence: 10, dodge: 10, will: 90, hacking: 5, health: 3, mobility: 6};
+    var enemy_two_class = {name: "Trooper", health: 0, aim: 7, will: 3, dodge: 0, hacking: 0};
+    var enemy_two = {player_name: "Trooper B", character_name: "Trooper", stats: enemy_two_stats, rank: 1,
+        rank_name: "basic", weapons: [assault], utilities: [], character_class: enemy_two_class,
+        id: 3, background: ""};
 
     function Player(player_json) {
         var self = this;
@@ -54,11 +185,18 @@
 
         self.player_name = player_json["player_name"];
         self.character_name = player_json["character_name"];
-        self.character_class = ko.observable(player_json["character_class"]["name"]);
+        self.class_name = ko.observable(player_json["character_class"]["name"]);
+        self.class_stats = {health: player_json["character_class"]["health"],
+                               aim: player_json["character_class"]["aim"],
+                              will: player_json["character_class"]["will"],
+                             dodge: player_json["character_class"]["dodge"],
+                           hacking: player_json["character_class"]["hacking"]};
+
         self.rank = player_json["rank"];
+        self.rank_name = player_json["rank_name"];
 
         self.aim = player_json["stats"]["aim"];
-        self.defence = player_json["stats"]["defence"];
+        self.defense = player_json["stats"]["defence"];
         self.dodge = player_json["stats"]["dodge"];
         self.will = player_json["stats"]["will"];
         self.hacking = player_json["stats"]["hacking"];
@@ -66,9 +204,20 @@
         self.mobility = player_json["stats"]["mobility"];
 
         self.weapons = [];
-        for ( var weapon_json in player_json["weapons"] ) {
-            self.weapons.push(new Weapon(weapon_json))
+
+        for (var i = 0; i < player_json["weapons"].length; i++) {
+            self.weapons.push(new Weapon(player_json["weapons"][i]))
         }
+
+        self.range = ko.observable("2");
+        self.elevation = ko.observable("1");
+        self.attack_status = ko.observableArray();
+        self.abilities = ko.observableArray();
+        self.bonuses = ko.observableArray();
+
+        self.cover = ko.observable("0");
+        self.defense_status = ko.observableArray();
+
     }
 
 
@@ -84,6 +233,13 @@
         self.short = weapon_json["srt"];
         self.medium = weapon_json["med"];
         self.long = weapon_json["lng"];
+
+        self.aim_bonus = weapon_json["aim_bonus"];
+
+{#        function aim() {#}
+{#            return self.aim_bonus;#}
+{#        }#}
+
     }
 
     function GameViewModel() {
@@ -93,10 +249,93 @@
              new Player(player_two)]);
 
         self.selectedPlayer = ko.observable();
-        {#self.showPlayer = function(player) { self.chosenPlayer(player); };#}
+        self.selectedWeapon = ko.observable();
+{#        self.selectedRange = ko.observable();#}
+{#        self.selectedElevation = ko.observable();#}
+{#        self.selectedAttackerStatus = ko.observableArray();#}
+
+        self.selectedDefender = ko.observable();
+{#        self.selectedDefenderCover = ko.observable();#}
+{#        self.selectedDefenderStatus = ko.observableArray();#}
+
+        self.enemies = ko.observableArray(
+            [new Player(enemy_one),
+             new Player(enemy_two)]);
+
+{#        self.selectedEnemy = ko.observable();#}
+
+        self.attack_roll = ko.observable("");
+        self.hit_type = ko.observable("");
 
 
-        self.enemies = ko.observableArray([]);
+        self.attacker_aim = ko.computed(function () {
+            var player = self.selectedPlayer();
+            var weapon = self.selectedWeapon();
+            if (player && weapon) {
+                return player.aim + weapon.aim_bonus + player.class_stats.aim;
+            }
+            return 0;
+        });
+
+        self.weapon_lethality = ko.computed(function () {
+            var weapon = self.selectedWeapon();
+            if (weapon) {
+                return weapon.lethality;
+            }
+            return 0;
+        });
+
+        self.graze_hit = ko.computed(function () {
+            var weapon = self.selectedWeapon();
+            if (weapon) {
+                return Math.floor(weapon.damage / 2);
+            }
+            return 0;
+        });
+
+        self.normal_hit = ko.computed(function () {
+            var weapon = self.selectedWeapon();
+            if (weapon) {
+                return weapon.damage;
+            }
+            return 0;
+        });
+
+        self.critical_hit = ko.computed(function () {
+            var weapon = self.selectedWeapon();
+            if (weapon) {
+                return weapon.damage + weapon.critical;
+            }
+            return 0;
+        });
+
+        self.defender_dodge = ko.computed(function () {
+            var defender = self.selectedDefender();
+            if (defender) {
+                return defender.dodge
+            }
+        });
+
+
+        self.defender_defense = ko.computed(function () {
+            var defender = self.selectedDefender();
+            if (defender) {
+                return defender.defense
+            }
+        });
+
+        self.do_attack = function() {
+            var roll = Math.floor(Math.random() * 100) + 1;
+            var result = "crit";
+            self.attack_roll(roll);
+            self.hit_type(result);
+        };
+
+        self.attack = function (roll) {
+
+
+        }
+
     }
 
     ko.applyBindings(new GameViewModel());

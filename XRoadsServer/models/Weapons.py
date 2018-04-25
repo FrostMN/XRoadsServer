@@ -1,6 +1,7 @@
 from XRoadsServer.enums.Ranges import Range
 import math, json
 
+
 class Weapon(object):
 
     _name:        str
@@ -42,6 +43,13 @@ class Weapon(object):
 
     def __str__(self) -> str:
         return self._name
+
+    def to_dict(self):
+
+        weapon_dict = {"name": self._name, "damage": self._damage, "critical": self._critical,
+                       "lethality": self._lethality, "clip": self._clip, "point_blank": self._point_blank,
+                       "short": self._short, "medium": self._medium, "long": self._long}
+        return weapon_dict
 
 
 class AssaultRifle(Weapon):
