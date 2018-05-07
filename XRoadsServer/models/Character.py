@@ -18,7 +18,7 @@ class Character(object):
     """ Character Stats """
     _rank:        Rank = Rank.Rookie
     _background:  Background
-    _class:       CharacterClass = None
+    _class:       CharacterClass
 
     """ Character Inventory """
     _weapons: [Weapon]
@@ -36,14 +36,16 @@ class Character(object):
     """ Abilities Chosen """
     _abilities: dict
 
-    def __init__(self, background: Background = None, player_name: str = None, character_name: str = None,
-                 primary_weapon: Weapon = None, utility: Union[list, Utility] = None, level: int=0,
-                 abilities: dict=None, db=None):
+    def __init__(self, background: Background = None, character_class: CharacterClass= None, player_name: str = None,
+                 character_name: str = None, primary_weapon: Weapon = None, utility: Union[list, Utility] = None,
+                 level: int=0, abilities: dict=None, player_id: int=0, db=None):
         if db is None:
             """ Initialize Bio """
             self._id = 0
             self._background = background
+            self._class = character_class
             self._player_name = player_name
+            self._player_id = player_id
             self._character_name = character_name
             self._level_up = level
 
@@ -242,6 +244,14 @@ class Character(object):
     @property
     def id_str(self):
         return str(self._id)
+
+    @property
+    def player_id(self):
+        return self._player_id
+
+    @property
+    def player_id_str(self):
+        return str(self._player_id)
 
     def add_ability(self, rank: Union[int, Rank], ability):
         if isinstance(rank, int):

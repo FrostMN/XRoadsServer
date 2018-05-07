@@ -2,3 +2,4 @@ bcrypt
 MySQLdb
 flask_api
 flask
+Flask-Mail

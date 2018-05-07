@@ -12,13 +12,13 @@ class User(object):
                 self.user_name = db_user[0]
                 self.user_id = db_user[7]
                 self.email = db_user[1]
-                self.email_confirmed = db_user[2]
+                self._email_confirmed = bool(db_user[2])
                 self.temp_email = db_user[3]
-                self.admin = db_user[4]
+                self._admin = bool(db_user[4])
                 self.first_name = db_user[5]
                 self.last_name = db_user[6]
                 self.characters = []
-                self.banned = 0
+                self._banned = bool(db_user[8])
             else:
                 raise TypeError
         else:
@@ -27,31 +27,30 @@ class User(object):
             self.user_id = user_id
             self.email = email
             self.temp_email = temp_email
-            self.admin = admin
-            self.email_confirmed = confirmed
+            self._admin = admin
+            self._email_confirmed = confirmed
             self.first_name = first_name
             self.last_name = last_name
             self.characters = []
-            self.banned = 0
+            self._banned = False
 
     def __eq__(self, other):
         """ Override the default Equals behavior """
         return self.user_id == other.user_id \
             and self.email == other.email \
-            and self.admin == other.admin \
-            and self.email_confirmed == other.email_confirmed \
+            and self._admin == other.admin \
+            and self._email_confirmed == other.email_confirmed \
             and self.first_name == other.first_name \
             and self.last_name == other.last_name
 
     def is_admin(self):
-        print(self.admin)
         if self.admin:
             return True
         else:
             return False
 
     def is_confirmed(self):
-        if self.email_confirmed:
+        if self._email_confirmed:
             return True
         else:
             return False
@@ -73,16 +72,28 @@ class User(object):
         if isinstance(ban, int):
             ban = bool(ban)
 
-        self.banned = ban
+        self._banned = ban
 
     def set_verified(self, email_confirmed: Union[int, bool]):
         if isinstance(email_confirmed, int):
             email_confirmed = bool(email_confirmed)
 
-        self.email_confirmed = email_confirmed
+        self._email_confirmed = email_confirmed
 
     def set_admin(self, admin: Union[int, bool]):
         if isinstance(admin, int):
             admin = bool(admin)
 
-        self.admin = admin
+        self._admin = admin
+
+    @property
+    def admin(self):
+        return self._admin
+
+    @property
+    def confirmed(self):
+        return self._email_confirmed
+
+    @property
+    def banned(self):
+        return self._banned

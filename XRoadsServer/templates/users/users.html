@@ -1,5 +1,25 @@
 {% extends 'partials/layout.html' %}
 {% block head %}
+    <script>
+
+        // Javascript to enable link to tab
+        var hash = document.location.hash;
+
+        window.onload = function () {
+
+
+            if (hash) {
+                $('.nav-pills a[href="' + hash + '"]').tab('show');
+            }
+
+            // Change hash for page-reload
+            $('.nav-pills a').on('shown', function (e) {
+                window.location.hash = e.target.hash.replace("#", "#");
+            });
+
+        }
+
+    </script>
 {% endblock %}
 {% block body %}
     <div class="container">
@@ -7,14 +27,17 @@
             <div class="col-3 bd-sidebar">
                 <div class="affix">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <a class="nav-link active d-flex justify-content-between align-items-center" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-characters" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                        <a class="nav-link active d-flex justify-content-between align-items-center" id="characters-tab"
+                           data-toggle="pill" href="#characters" role="tab" aria-controls="characters-tab" aria-selected="true">
                             Characters
                             {% if level_up %}
                             <span class="badge badge-primary badge-pill">{{ level_up }}</span>
                             {% endif %}
                         </a>
-                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
-                        <a class="nav-link d-flex justify-content-between align-items-center" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                        <a class="nav-link" id="profile-tab" data-toggle="pill" href="#profile" role="tab"
+                           aria-controls="profile-tab" aria-selected="false">Profile</a>
+                        <a class="nav-link d-flex justify-content-between align-items-center" id="messages-tab"
+                           data-toggle="pill" href="#messages" role="tab" aria-controls="messages-tab" aria-selected="false">
                             Messages
                             <span class="badge badge-primary badge-pill">0</span>
                         </a>
@@ -23,13 +46,13 @@
             </div>
             <div class="col-9">
                 <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade show active" id="v-pills-characters" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                    <div class="tab-pane fade show active" id="characters" role="tabpanel" aria-labelledby="characters-tab">
                         {% include 'users/characters.html' %}
                     </div>
-                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         {% include 'users/profile.html' %}
                     </div>
-                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                    <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messages-tab">
                         {% include 'users/messages.html' %}
                     </div>
                 </div>

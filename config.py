@@ -23,6 +23,14 @@ class Config(object):
 
     MYSQL_CONN = MYSQL_TEMPLATE.format(MYSQL_USER, MYSQL_PASSWORD, MYSQL_HOST, MYSQL_PORT, MYSQL_DB)
 
+    # Email Config
+    MAIL_SERVER = "smtp.gmail.com"
+    MAIL_PORT = 465
+    MAIL_USE_SSL = True
+    MAIL_USERNAME = os.getenv("XROADS_MAIL_USER")
+    MAIL_PASSWORD = os.getenv("XROADS_MAIL_PWORD")
+    MAIL_DEFAULT_SENDER = "XRoadsServer"
+
 
 # Overrides the default Config Object for Production
 class ProductionConfig(Config):

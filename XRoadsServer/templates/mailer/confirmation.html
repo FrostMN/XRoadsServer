@@ -1,0 +1,15 @@
+{% extends 'mailer/partials/email_layout.html' %}
+{% block body %}
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                {{ title }}
+            </div>
+            <div class="card-body">
+{#                <h5 class="card-title">Special title treatment</h5>#}
+                <p class="card-text">Thank you for signing up for XRoads. Please click the button below to validate your email</p>
+                <a href="{{ validation }}" class="btn btn-primary">Validate Email</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

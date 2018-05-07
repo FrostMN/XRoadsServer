@@ -2,6 +2,7 @@ from flask import session, redirect, url_for
 import XRoadsServer.utils.secrets.users as secrets
 from XRoadsServer.models.users import User
 from XRoadsServer.models.Character import Character
+import XRoadsServer.utils.mailer.mailer as mail
 from typing import Union
 import XRoadsServer.utils.database.connection as db
 import time
@@ -43,8 +44,11 @@ def update_email(new_email: str, old_email: str) -> dict:
         # print(args)
         session["confirmed"] = False
         session["temp_email"] = new_email
-        # TODO: send email verification
+
+        # send email verification
+        mail.send_confirmation(new_email, nonce)
         # TODO: send warning to old email
+
         db.execute_query(update_email_qry, args)
 
         return {'error': False, 'message': 'Email successfully updated!'}
@@ -140,12 +144,14 @@ def create(form_user):
 
             create_qry = "INSERT INTO users (" \
                          "    user_name, email, temp_email, first_name, last_name, hash, nonce, nonce_timestamp" \
-                         ") " \
-                         "VALUES ( %s, %s, %s, %s, %s, %s, %s, %s )"
+                         ") VALUES ( %s, %s, %s, %s, %s, %s, %s, %s )"
 
             time_stamp = datetime.datetime.fromtimestamp(nonce_time)
 
             db.execute_query(create_qry, (user_name, email, email, first, last, hashed, nonce, time_stamp))
+
+            mail.send_confirmation(email, nonce)
+
             user = get_user_by_name(user_name)
             start_session(user)
             return {"error": False, "message": "Account created."}
@@ -196,9 +202,13 @@ def get_user_by_nonce(nonce):
                "WHERE nonce = %s"
 
     rs = db.get_rs(user_qry, (nonce,))
-    db_user = User(db_user=rs)
-    db_user.add_characters(get_characters(db_user.user_id))
-    return db_user
+
+    if rs:
+        db_user = User(db_user=rs)
+        db_user.add_characters(get_characters(db_user.user_id))
+        return db_user
+    else:
+        return None
 
 
 def validate_email(old_email: str, new_email: str):
@@ -321,5 +331,5 @@ def get_user_by_id(user_id):
 
 def update_user(db_user: User):
     update_qry = "UPDATE users SET email_confirmed = %s, admin = %s, banned = %s WHERE user_id = %s"
-    args = (db_user.email_confirmed, db_user.admin, db_user.banned, db_user.id)
+    args = (db_user.confirmed, db_user.admin, db_user.banned, db_user.id)
     db.execute_query(update_qry, args)

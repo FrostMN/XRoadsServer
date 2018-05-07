@@ -63,7 +63,7 @@ def delete_char():
 @mod.route('/edit/char', methods=['GET', 'POST'])
 def edit_char():
     admin = False
-    print("/euser/dit/char")
+    print("/user/edit/char")
     print(request.form)
     if request.method == "POST":
         char_id = request.form["char_id"]
@@ -144,7 +144,7 @@ def edit_email():
                 return redirect(url_for("users.user"))
             else:
                 flash(message["message"])
-                return redirect(url_for("users.user"))
+                return redirect(url_for("users.user") + "#profile")
         else:
             return redirect(url_for("users.user"))
     else:
@@ -215,11 +215,11 @@ def edit_user():
         db_user = db_users.get_user_by_id(request.form["user_id"])
 
         if "admin" in request.form.keys():
-            db_user.admin = request.form["admin"]
+            db_user.set_admin(request.form["admin"])
         if "verified" in request.form.keys():
-            db_user.verified = request.form["verified"]
+            db_user.set_verified(request.form["verified"])
         if "banned" in request.form.keys():
-            db_user.banned = request.form["banned"]
+            db_user.set_banned(request.form["banned"])
 
         db_users.update_user(db_user)
 
@@ -232,8 +232,11 @@ def edit_user():
 def validate(nonce: str):
     if request.method == "GET":
         email_user = db_users.get_user_by_nonce(str(nonce))
-        db_users.validate_email(email_user.email, email_user.temp_email)
-        return redirect(url_for("users.user"))
+        if email_user:
+            db_users.validate_email(email_user.email, email_user.temp_email)
+            return redirect(url_for("users.user") + "#profile")
+        else:
+            return redirect(url_for("users.user"))
     else:
         return redirect(url_for("home.index"))
 
