@@ -1,0 +1,74 @@
+{#
+<div class="card">
+    <h5 class="card-header">Featured</h5>
+    <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+</div>
+#}
+
+<div class="card">
+    <h5 class="card-header">{{ session["first_name"] }} {{ session["last_name"] }}</h5>
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-2">
+                <input type="text" readonly class="form-control-plaintext" id="userEmail" value="Username:">
+            </div>
+            <div class="col-10">
+                <input type="text" readonly class="form-control" id="userEmail" value="{{ session['user_name'] }}">
+            </div>
+        </div>
+    <br>
+        <div class="row">
+            <div class="col-2">
+                <input type="text" readonly class="form-control-plaintext" id="userEmail" value="Email:">
+            </div>
+            <div class="col-6">
+                {% if session["temp_email"] %}
+                    <input type="text" readonly class="form-control" id="userEmail" value="{{ session['temp_email'] }}">
+                {% else %}
+                    <input type="text" readonly class="form-control" id="userEmail" value="{{ session['email'] }}">
+                {% endif %}
+            </div>
+            {% if session["confirmed"] %}
+                <div class="col-2">
+{#                    <span class="badge badge-pill badge-success">confirmed</span>#}
+                    <button type="button" class="btn btn-success" disabled>confirmed</button>
+                </div>
+            {% else %}
+                <div class="col-2">
+{#                    <span class="badge badge-pill badge-danger">unconfirmed</span>#}
+                    <form action="{{ url_for('users.resend_confirm') }}">
+                        <button type="submit" class="btn btn-warning">resend</button>
+                    </form>
+                </div>
+            {% endif %}
+            <div class="col-1">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editEmailModal">edit</button>
+            </div>
+        </div>
+    <br>
+        <div class="row">
+            <div class="col-2">
+                <input type="text" readonly class="form-control-plaintext" id="userEmail" value="Password:">
+            </div>
+            <div class="col-8">
+                <input type="text" readonly class="form-control" id="userEmail" value="************">
+            </div>
+            <div class="col-1">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editPasswordModal">edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% with modal_title = 'Edit Password', modal_id = 'editPassword', modalType = 'save', form_id = 'edit_pw' %}
+    {% include 'users/modals/edit_password.html' %}
+{% endwith %}
+
+{% with modal_title = 'Edit Email', modal_id = 'editEmail', modalType = 'save', form_id = 'edit_email' %}
+    {% include 'users/modals/edit_email.html' %}
+{% endwith %}

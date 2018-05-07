@@ -1,0 +1,46 @@
+<script>
+
+    function setSelectedAbility(index, id) {
+        var input = document.getElementById(id);
+        input.value = index;
+    }
+
+</script>
+<ul class="nav nav-pills mb-3" id="lance-corporal-abilities-tab-{{ character.id }}" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="ability-one-tab-{{ character.id }}" data-toggle="pill"
+           href="#ability-one-text-{{ character.id }}" role="tab" aria-controls="slug-shot-text-{{ character.id }}"
+           aria-selected="true" onclick="setSelectedAbility('1', 'ability-{{ character.id }}')">
+            Walk Fire
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="ability-two-tab-{{ character.id }}" data-toggle="pill"
+           href="#ability-two-text-{{ character.id }}" role="tab" aria-controls="electroshock-text-{{ character.id }}"
+           aria-selected="false" onclick="setSelectedAbility('2', 'ability-{{ character.id }}')">
+            Close and Personal
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="ability-three-tab-{{ character.id }}" data-toggle="pill"
+           href="#ability-three-text-{{ character.id }}" role="tab" aria-controls="lightning-reflexes-text-{{ character.id }}"
+           aria-selected="false" onclick="setSelectedAbility('3', 'ability-{{ character.id }}')">
+            Ever Vigilant
+        </a>
+    </li>
+</ul>
+<div class="tab-content" id="lance-corporal-abilities-tabContent-{{ character.id }}">
+    <div class="tab-pane fade show active" id="ability-one-text-{{ character.id }}" role="tabpanel" aria-labelledby="slug-shot-tab-{{ character.id }}">
+        Take a highly accurate shot with +30 bonus to hit but for half damage and -30 crit. Uses 2 ammo.
+    </div>
+    <div class="tab-pane fade" id="ability-two-text-{{ character.id }}" role="tabpanel" aria-labelledby="electroshock-tab-{{ character.id }}">
+        Confers +30 critical chance against adjacent targets. The bonus declines with distance from the target.
+    </div>
+    <div class="tab-pane fade" id="ability-three-text-{{ character.id }}" role="tabpanel" aria-labelledby="lightning-reflexes-tab-{{ character.id }}">
+        If you spend all of your actions on moves, you are granted an automatic overwatch shot at the end of the turn.
+    </div>
+</div>
+
+<input type="hidden" id="ability-{{ character.id }}" name="ability" value="1">
+<input type="hidden" name="character_id" value="{{ character.id }}">
+

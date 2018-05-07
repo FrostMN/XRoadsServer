@@ -1,3 +1,4 @@
+from flask import session
 import bcrypt
 import hashlib
 import base64
@@ -37,3 +38,9 @@ def normalize_password(password):
     hashed_encoded = hashlib.sha256(encoded_password).digest()
     b64_encoded = base64.b64encode(hashed_encoded)
     return str(b64_encoded, 'utf-8')
+
+
+def logged_in(route):
+    # print(type(route))
+    # print(session)
+    pass

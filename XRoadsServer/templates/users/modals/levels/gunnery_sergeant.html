@@ -1,0 +1,26 @@
+Level from Gunnery Sergeant to Master Sergeant {{ character.character_class }}
+<br>
+{% if character.character_class.name == 'Assault' %}
+    {% include 'users/modals/classes/assault/to_master_sergeant.html' %}
+{% endif %}
+{% if character.character_class.name == 'Grenadier' %}
+    {% include 'users/modals/classes/grenadier/to_master_sergeant.html' %}
+{% endif %}
+{% if character.character_class.name == 'Gunner' %}
+    {% include 'users/modals/classes/gunner/to_master_sergeant.html' %}
+{% endif %}
+{% if character.character_class.name == 'Ranger' %}
+    {% include 'users/modals/classes/ranger/to_master_sergeant.html' %}
+{% endif %}
+{% if character.character_class.name == 'Sharpshooter' %}
+    {% include 'users/modals/classes/sharpshooter/to_master_sergeant.html' %}
+{% endif %}
+{% if character.character_class.name == 'Shinobi' %}
+    {% include 'users/modals/classes/shinobi/to_master_sergeant.html' %}
+{% endif %}
+{% if character.character_class.name == 'Specialist' %}
+    {% include 'users/modals/classes/specialist/to_master_sergeant.html' %}
+{% endif %}
+{% if character.character_class.name == 'Technical' %}
+    {% include 'users/modals/classes/technical/to_master_sergeant.html' %}
+{% endif %}

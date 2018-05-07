@@ -7,7 +7,9 @@ CREATE TABLE users(
     user_name VARCHAR(120) UNIQUE NOT NULL,
     email VARCHAR(120) UNIQUE NOT NULL,
     email_confirmed SMALLINT NOT NULL DEFAULT 0,
+    temp_email VARCHAR(120) UNIQUE,
     admin SMALLINT NOT NULL DEFAULT 0,
+    banned SMALLINT NOT NULL DEFAULT 0,
     first_name VARCHAR(120) DEFAULT '',
     last_name VARCHAR(120) DEFAULT '',
     hash VARCHAR(60) NOT NULL,
@@ -22,9 +24,21 @@ create_characters = """
 CREATE TABLE characters(
     characters_id INTEGER AUTO_INCREMENT,
     user_id INTEGER NOT NULL,
-    characters_name VARCHAR(120) NOT NULL,
-    characters_class VARCHAR(120) NOT NULL,
-    
+    character_name VARCHAR(120) NOT NULL,
+    character_background VARCHAR(3) NOT NULL,
+    character_class VARCHAR(3) NOT NULL DEFAULT 'UNT', -- added NOT NULL and didn't test right away
+    character_rank INTEGER DEFAULT 0,
+    rank_up SMALLINT DEFAULT 0,
+
+    -- Abilities 
+    lance_corporal_ability INTEGER DEFAULT NULL,
+    corporal_ability INTEGER DEFAULT NULL,
+    sergeant_ability INTEGER DEFAULT NULL,
+    staff_sergeant_ability INTEGER DEFAULT NULL,
+    tech_sergeant_ability INTEGER DEFAULT NULL,
+    gunnery_sergeant_ability INTEGER DEFAULT NULL,
+    master_sergeant_ability INTEGER DEFAULT NULL,
+        
     CONSTRAINT fk_user
         FOREIGN KEY (user_id)
         REFERENCES users(user_id)

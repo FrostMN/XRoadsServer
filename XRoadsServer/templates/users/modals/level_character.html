@@ -1,0 +1,29 @@
+{% extends 'partials/modals/modal.html' %}
+{% block modal_body %}
+<form id="level_{{ char.id }}" action="{{ url_for('users.level_char') }}" method="POST">
+    {% if char.rank == 'Rookie' %}
+        {% include '/users/modals/levels/rookie.html' %}
+    {% endif %}
+    {% if char.rank == 'Squaddie' %}
+        {% include '/users/modals/levels/squaddie.html' %}
+    {% endif %}
+    {% if char.rank == 'LanceCorporal' %}
+        {% include '/users/modals/levels/lance_corporal.html' %}
+    {% endif %}
+    {% if char.rank == 'Corporal' %}
+        {% include '/users/modals/levels/corporal.html' %}
+    {% endif %}
+    {% if char.rank == 'Sergeant' %}
+        {% include '/users/modals/levels/sergeant.html' %}
+    {% endif %}
+    {% if char.rank == 'StaffSergeant' %}
+        {% include '/users/modals/levels/staff_sergeant.html' %}
+    {% endif %}
+    {% if char.rank == 'TechSergeant' %}
+        {% include '/users/modals/levels/tech_sergeant.html' %}
+    {% endif %}
+    {% if char.rank == 'GunnerySergeant' %}
+        {% include '/users/modals/levels/gunnery_sergeant.html' %}
+    {% endif %}
+</form>
+{% endblock %}

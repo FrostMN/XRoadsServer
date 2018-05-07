@@ -2,7 +2,7 @@
 
 {% block head %}
     <!-- Custom styles for this template -->
-    <link href="{{ url_for('static', filename='css/grid.css') }}" rel="stylesheet">
+{#    <link href="{{ url_for('static', filename='css/grid.css') }}" rel="stylesheet">#}
 
     <!-- Include for KnockoutJS -->
     <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
@@ -12,7 +12,7 @@
 
 {% block body %}
     <div class="container">
-    <div class="row">
+    <div class="row" id="body">
         <div class="col">
             <button data-bind="click: $root.do_attack">attack</button>
             <label>Roll:</label> <input data-bind="textInput: $root.attack_roll()" size="4" readonly> |
@@ -40,9 +40,22 @@
     <br>
 
 
-    <label for="selected_weapon">Character Class: </label>
-    <select id="selected_weapon" data-bind="options: selectedPlayer() ? selectedPlayer().weapons : 'None',
-                                       value: selectedWeapon,
+{#    <label for="selected_weapon">Weapon: </label>#}
+{#    <select id="selected_weapon" data-bind="options: selectedPlayer() ? selectedPlayer().weapons : 'None',#}
+{#                                       value: selectedWeapon,#}
+{#                                       optionsText: 'name'"></select><br>#}
+
+{#    <label for="selected_weapon">Weapon: </label>#}
+{#    <select id="selected_weapon" data-bind="options: selectedPlayer().weapons,#}
+{#                                       value: selectedPlayer().selectedWeapon,#}
+{#                                       value: selectedPlayer().selectedPlayerWeapon(),#}
+{#                                       value: selectedPlayerWeapon,#}
+{#                                       optionsText: 'name'"></select>#}
+
+    <label for="selected_weapon">Weapon: </label>
+    <select id="selected_weapon" data-bind="options: selectedPlayer().weapons,
+                                       value: selectedPlayer().selectedWeapon,
+{#                                       value: selectedPlayerWeapon,#}
                                        optionsText: 'name'"></select>
 
     <br>
@@ -62,48 +75,33 @@
     <input id="character_aim" data-bind="textInput: critical_hit" readonly>
     <br>
 
-    <br>
-    <label for="p_stat">PBR</label>/<label for="c_stat">C</label>/<label for="m_stat">M</label>/<label for="l_stat">L</label>:<br>
-    <input id="p_stat" data-bind="textInput: selectedWeapon() ? selectedWeapon().point_blank : 'unknown'" size="4" readonly>/
-    <input id="c_stat" data-bind="textInput: selectedWeapon() ? selectedWeapon().short : 'unknown'" size="4" readonly>/
-    <input id="m_stat" data-bind="textInput: selectedWeapon() ? selectedWeapon().medium : 'unknown'" size="4" readonly>/
-    <input id="l_stat" data-bind="textInput: selectedWeapon() ? selectedWeapon().long : 'unknown'" size="4" readonly>
-    <br>
+{#    <br>#}
+{#    <label for="p_stat">PBR</label>/<label for="c_stat">C</label>/<label for="m_stat">M</label>/<label for="l_stat">L</label>:<br>#}
+{#    <input id="p_stat" data-bind="textInput: selectedWeapon() ? selectedWeapon().point_blank : 'unknown'" size="4" readonly>/#}
+{#    <input id="c_stat" data-bind="textInput: selectedWeapon() ? selectedWeapon().short : 'unknown'" size="4" readonly>/#}
+{#    <input id="m_stat" data-bind="textInput: selectedWeapon() ? selectedWeapon().medium : 'unknown'" size="4" readonly>/#}
+{#    <input id="l_stat" data-bind="textInput: selectedWeapon() ? selectedWeapon().long : 'unknown'" size="4" readonly>#}
+{#    <br>#}
 
     <br>
-    <label for="attacker_range">Range: </label>
-{#        <span data-bind="text: selectedRange"></span>#}
-                                               <span data-bind="text: selectedPlayer().range"></span><br>
+    <label for="attacker_range">Range: </label><span data-bind="text: selectedPlayer().range"></span><br>
     <input type="radio" name="rangeGroup" value="0" data-bind="checked: selectedPlayer().range" /> Point Blank
     <input type="radio" name="rangeGroup" value="1" data-bind="checked: selectedPlayer().range" /> Close
     <input type="radio" name="rangeGroup" value="2" data-bind="checked: selectedPlayer().range" /> Medium
     <input type="radio" name="rangeGroup" value="3" data-bind="checked: selectedPlayer().range" /> Long
-{#    <input type="radio" name="rangeGroup" value="0" data-bind="checked: selectedRange" /> Point Blank#}
-{#    <input type="radio" name="rangeGroup" value="1" data-bind="checked: selectedRange" /> Close#}
-{#    <input type="radio" name="rangeGroup" value="2" data-bind="checked: selectedRange" /> Medium#}
-{#    <input type="radio" name="rangeGroup" value="3" data-bind="checked: selectedRange" /> Long#}
     <br>
 
     <label for="attacker_elevation">Elevation: </label> <span data-bind="text: selectedPlayer().elevation"></span><br>
     <input type="radio" name="elevationGroup" value="0" data-bind="checked: selectedPlayer().elevation" /> Low
     <input type="radio" name="elevationGroup" value="1" data-bind="checked: selectedPlayer().elevation" /> Even
     <input type="radio" name="elevationGroup" value="2" data-bind="checked: selectedPlayer().elevation" /> High
-{#    <input type="radio" name="elevationGroup" value="0" data-bind="checked: selectedElevation" /> Low#}
-{#    <input type="radio" name="elevationGroup" value="1" data-bind="checked: selectedElevation" /> Even#}
-{#    <input type="radio" name="elevationGroup" value="2" data-bind="checked: selectedElevation" /> High#}
     <br>
-
-{#        status#}
 
     <label for="attacker_status">Attacker Status: </label> <span data-bind="text: selectedPlayer().attack_status"></span><br>
     <input type="checkbox" name="selectedAttackerGroup" value="0" data-bind="checked: selectedPlayer().attack_status" /> Buff 1
     <input type="checkbox" name="selectedAttackerGroup" value="1" data-bind="checked: selectedPlayer().attack_status" /> Buff 2
     <input type="checkbox" name="selectedAttackerGroup" value="2" data-bind="checked: selectedPlayer().attack_status" /> DeBuff 1
     <input type="checkbox" name="selectedAttackerGroup" value="3" data-bind="checked: selectedPlayer().attack_status" /> DeBuff 2
-{#    <input type="checkbox" name="selectedAttackerGroup" value="0" data-bind="checked: selectedAttackerStatus" /> Buff 1#}
-{#    <input type="checkbox" name="selectedAttackerGroup" value="1" data-bind="checked: selectedAttackerStatus" /> Buff 2#}
-{#    <input type="checkbox" name="selectedAttackerGroup" value="2" data-bind="checked: selectedAttackerStatus" /> DeBuff 1#}
-{#    <input type="checkbox" name="selectedAttackerGroup" value="3" data-bind="checked: selectedAttackerStatus" /> DeBuff 2#}
     <br>
 
 
@@ -178,7 +176,7 @@
         rank_name: "basic", weapons: [assault], utilities: [], character_class: enemy_two_class,
         id: 3, background: ""};
 
-    function Player(player_json) {
+    function Character(player_json) {
         var self = this;
 
         self.id = player_json["id"];
@@ -209,6 +207,9 @@
             self.weapons.push(new Weapon(player_json["weapons"][i]))
         }
 
+        self.selectedWeapon = ko.observable();
+
+
         self.range = ko.observable("2");
         self.elevation = ko.observable("1");
         self.attack_status = ko.observableArray();
@@ -217,6 +218,9 @@
 
         self.cover = ko.observable("0");
         self.defense_status = ko.observableArray();
+
+
+{#        self.selectedPlayerWeapon = ko.observable();#}
 
     }
 
@@ -249,14 +253,7 @@
              new Player(player_two)]);
 
         self.selectedPlayer = ko.observable();
-        self.selectedWeapon = ko.observable();
-{#        self.selectedRange = ko.observable();#}
-{#        self.selectedElevation = ko.observable();#}
-{#        self.selectedAttackerStatus = ko.observableArray();#}
-
         self.selectedDefender = ko.observable();
-{#        self.selectedDefenderCover = ko.observable();#}
-{#        self.selectedDefenderStatus = ko.observableArray();#}
 
         self.enemies = ko.observableArray(
             [new Player(enemy_one),
@@ -270,41 +267,55 @@
 
         self.attacker_aim = ko.computed(function () {
             var player = self.selectedPlayer();
-            var weapon = self.selectedWeapon();
-            if (player && weapon) {
-                return player.aim + weapon.aim_bonus + player.class_stats.aim;
+            if (player) {
+                var weapon = player.selectedWeapon();
+                if (weapon) {
+                    return player.aim + weapon.aim_bonus + player.class_stats.aim;
+                }
             }
             return 0;
         });
 
         self.weapon_lethality = ko.computed(function () {
-            var weapon = self.selectedWeapon();
-            if (weapon) {
-                return weapon.lethality;
+            var player = self.selectedPlayer();
+            if (player) {
+                var weapon = player.selectedWeapon();
+                if (weapon) {
+                    return weapon.lethality;
+                }
             }
             return 0;
         });
 
         self.graze_hit = ko.computed(function () {
-            var weapon = self.selectedWeapon();
-            if (weapon) {
-                return Math.floor(weapon.damage / 2);
+            var player = self.selectedPlayer();
+            if (player) {
+                var weapon = player.selectedWeapon();
+                if (weapon) {
+                    return Math.floor(weapon.damage / 2);
+                }
             }
             return 0;
         });
 
         self.normal_hit = ko.computed(function () {
-            var weapon = self.selectedWeapon();
-            if (weapon) {
-                return weapon.damage;
+            var player = self.selectedPlayer();
+            if (player) {
+                var weapon = player.selectedWeapon();
+                if (weapon) {
+                    return weapon.damage;
+                }
             }
             return 0;
         });
 
         self.critical_hit = ko.computed(function () {
-            var weapon = self.selectedWeapon();
-            if (weapon) {
-                return weapon.damage + weapon.critical;
+            var player = self.selectedPlayer();
+            if (player) {
+                var weapon = player.selectedWeapon();
+                if (weapon) {
+                    return weapon.damage + weapon.critical;
+                }
             }
             return 0;
         });

@@ -1,0 +1,21 @@
+.menu-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1045;
+}
+
+/*.inner-side-bar {*/
+    /*position: fixed;*/
+    /*width: 100%;*/
+/*}*/
+
+.side-bar {
+    position: fixed;
+}
+
+#body {
+    margin-top: 5em;
+    margin-bottom: 3em;
+}

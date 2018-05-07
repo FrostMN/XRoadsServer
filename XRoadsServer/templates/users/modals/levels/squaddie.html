@@ -1,0 +1,38 @@
+Level from Squaddie to Lance Corporal {{ character.character_class }}
+<br>
+{% if character.character_class.name == 'Assault' %}
+    {% include 'users/modals/classes/assault/to_lance_corporal.html' %}
+{% endif %}
+{% if character.character_class.name == 'Grenadier' %}
+    {% include 'users/modals/classes/grenadier/to_lance_corporal.html' %}
+{% endif %}
+{% if character.character_class.name == 'Gunner' %}
+    {% include 'users/modals/classes/gunner/to_lance_corporal.html' %}
+{% endif %}
+{% if character.character_class.name == 'Ranger' %}
+    {% include 'users/modals/classes/ranger/to_lance_corporal.html' %}
+{% endif %}
+{% if character.character_class.name == 'Sharpshooter' %}
+    {% include 'users/modals/classes/sharpshooter/to_lance_corporal.html' %}
+{% endif %}
+{% if character.character_class.name == 'Shinobi' %}
+    {% include 'users/modals/classes/shinobi/to_lance_corporal.html' %}
+{% endif %}
+{% if character.character_class.name == 'Specialist' %}
+    {% include 'users/modals/classes/specialist/to_lance_corporal.html' %}
+{% endif %}
+{% if character.character_class.name == 'Technical' %}
+    {% include 'users/modals/classes/technical/to_lance_corporal.html' %}
+{% endif %}
+
+{#"""Classes"""#}
+{#"""#}
+{#Assault#}
+{#Grenadier#}
+{#Gunner#}
+{#Ranger#}
+{#Sharpshooter#}
+{#Shinobi#}
+{#Specialist#}
+{#Technical#}
+{#"""#}

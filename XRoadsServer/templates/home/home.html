@@ -2,6 +2,9 @@
 {% block head %}
 {% endblock %}
 {% block body %}
+
+    <div class="container">
+        <div class="row" id="body">
     User:
     {% if session["user_name"] %}
      {{ session["user_name"] }}
@@ -17,11 +20,9 @@
     <br>
 {#    {{ session.keys() }}#}
 
-    {% with messages = get_flashed_messages() %}
-        {% for message in messages %}
-            {{ message }}
-        {% endfor %}
-    {% endwith %}
+
+        </div>
+    </div>
 
 {% endblock %}
 

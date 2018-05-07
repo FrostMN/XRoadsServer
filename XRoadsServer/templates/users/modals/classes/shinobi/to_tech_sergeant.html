@@ -1,0 +1,46 @@
+<script>
+
+    function setSelectedAbility(index, id) {
+        var input = document.getElementById(id);
+        input.value = index;
+    }
+
+</script>
+
+<ul class="nav nav-pills mb-3" id="tech-sergeant-abilities-tab-{{ character.id }}" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="ability-one-tab-{{ character.id }}" data-toggle="pill"
+           href="#ability-one-text-{{ character.id }}" role="tab" aria-controls="slug-shot-text-{{ character.id }}"
+           aria-selected="true" onclick="setSelectedAbility('1', 'ability-{{ character.id }}')">
+            Hunter's Instincts
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="ability-two-tab-{{ character.id }}" data-toggle="pill"
+           href="#ability-two-text-{{ character.id }}" role="tab" aria-controls="electroshock-text-{{ character.id }}"
+           aria-selected="false" onclick="setSelectedAbility('2', 'ability-{{ character.id }}')">
+            Evasive
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="ability-three-tab-{{ character.id }}" data-toggle="pill"
+           href="#ability-three-text-{{ character.id }}" role="tab" aria-controls="lightning-reflexes-text-{{ character.id }}"
+           aria-selected="false" onclick="setSelectedAbility('3', 'ability-{{ character.id }}')">
+            Reaper
+        </a>
+    </li>
+</ul>
+<div class="tab-content" id="tech-sergeant-abilities-tabContent-{{ character.id }}">
+    <div class="tab-pane fade show active" id="ability-one-text-{{ character.id }}" role="tabpanel" aria-labelledby="slug-shot-tab-{{ character.id }}">
+        Ranged attacks against exposed enemies deal +2 damage.
+    </div>
+    <div class="tab-pane fade" id="ability-two-text-{{ character.id }}" role="tabpanel" aria-labelledby="electroshock-tab-{{ character.id }}">
+        Start each mission with 100 bonus dodge. The bonus is removed after you take damage for the first time.
+    </div>
+    <div class="tab-pane fade" id="ability-three-text-{{ character.id }}" role="tabpanel" aria-labelledby="lightning-reflexes-tab-{{ character.id }}">
+        A devastating chain melee attack where the first melee attack cannot miss. Each melee kill in Reaper mode grants an extra action, but further melee attacks have reduced damage. 5-turn cooldown.
+    </div>
+</div>
+
+<input type="hidden" id="ability-{{ character.id }}" name="ability" value="1">
+<input type="hidden" name="character_id" value="{{ character.id }}">

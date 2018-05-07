@@ -1,0 +1,26 @@
+Level from Sergeant to Staff Sergeant {{ character.character_class }}
+<br>
+{% if character.character_class.name == 'Assault' %}
+    {% include 'users/modals/classes/assault/to_staff_sergeant.html' %}
+{% endif %}
+{% if character.character_class.name == 'Grenadier' %}
+    {% include 'users/modals/classes/grenadier/to_staff_sergeant.html' %}
+{% endif %}
+{% if character.character_class.name == 'Gunner' %}
+    {% include 'users/modals/classes/gunner/to_staff_sergeant.html' %}
+{% endif %}
+{% if character.character_class.name == 'Ranger' %}
+    {% include 'users/modals/classes/ranger/to_staff_sergeant.html' %}
+{% endif %}
+{% if character.character_class.name == 'Sharpshooter' %}
+    {% include 'users/modals/classes/sharpshooter/to_staff_sergeant.html' %}
+{% endif %}
+{% if character.character_class.name == 'Shinobi' %}
+    {% include 'users/modals/classes/shinobi/to_staff_sergeant.html' %}
+{% endif %}
+{% if character.character_class.name == 'Specialist' %}
+    {% include 'users/modals/classes/specialist/to_staff_sergeant.html' %}
+{% endif %}
+{% if character.character_class.name == 'Technical' %}
+    {% include 'users/modals/classes/technical/to_staff_sergeant.html' %}
+{% endif %}

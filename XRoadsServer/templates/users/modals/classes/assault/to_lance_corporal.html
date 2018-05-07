@@ -1,0 +1,46 @@
+<script>
+
+    function setSelectedAbility(index, id) {
+        var input = document.getElementById(id);
+        input.value = index;
+    }
+
+</script>
+<ul class="nav nav-pills mb-3" id="lance-corporal-abilities-tab-{{ character.id }}" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="ability-one-tab-{{ character.id }}" data-toggle="pill"
+           href="#ability-one-text-{{ character.id }}" role="tab" aria-controls="slug-shot-text-{{ character.id }}"
+           aria-selected="true" onclick="setSelectedAbility('1', 'ability-{{ character.id }}')">
+            Slug Shot
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="ability-two-tab-{{ character.id }}" data-toggle="pill"
+           href="#ability-two-text-{{ character.id }}" role="tab" aria-controls="electroshock-text-{{ character.id }}"
+           aria-selected="false" onclick="setSelectedAbility('2', 'ability-{{ character.id }}')">
+            Electroshock
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="ability-three-tab-{{ character.id }}" data-toggle="pill"
+           href="#ability-three-text-{{ character.id }}" role="tab" aria-controls="lightning-reflexes-text-{{ character.id }}"
+           aria-selected="false" onclick="setSelectedAbility('3', 'ability-{{ character.id }}')">
+            Lightning Reflexes
+        </a>
+    </li>
+</ul>
+<div class="tab-content" id="lance-corporal-abilities-tabContent-{{ character.id }}">
+    <div class="tab-pane fade show active" id="ability-one-text-{{ character.id }}" role="tabpanel" aria-labelledby="slug-shot-tab-{{ character.id }}">
+        Special shot for primary-weapon shotguns only: Fire a shot that pierces two armor and has no range penalties. Uses 2 ammo. Three turn cooldown.
+    </div>
+    <div class="tab-pane fade" id="ability-two-text-{{ character.id }}" role="tabpanel" aria-labelledby="electroshock-tab-{{ character.id }}">
+        Your arc thrower disorients the target when it misses.
+    </div>
+    <div class="tab-pane fade" id="ability-three-text-{{ character.id }}" role="tabpanel" aria-labelledby="lightning-reflexes-tab-{{ character.id }}">
+        Reaction fire shots against you have a significantly decreased chance to hit. The bonus goes down with each additional reaction shot you face. First: -100; Second, -80; Third, -60, etc.
+    </div>
+</div>
+
+<input type="hidden" id="ability-{{ character.id }}" name="ability" value="1">
+<input type="hidden" name="character_id" value="{{ character.id }}">
+

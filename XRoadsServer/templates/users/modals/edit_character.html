@@ -1,0 +1,10 @@
+{% extends 'partials/modals/modal.html' %}
+{% block modal_body %}
+<form id="edit-char-{{ char.id_str }}" action="{{ url_for('users.edit_char') }}" method="POST">
+    <div class="form-group">
+        <input type="hidden" name="char_id" value="{{ char.id_str }}">
+        <label for="exampleInputEmail1">Character Name:</label>
+        <input type="text" name="name" class="form-control" id="edit_{{ char.id_str }}" value="{{ char.character_name }}" aria-describedby="emailHelp" placeholder="Name">
+    </div>
+</form>
+{% endblock %}

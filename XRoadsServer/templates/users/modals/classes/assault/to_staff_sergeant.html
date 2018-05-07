@@ -1,0 +1,46 @@
+<script>
+
+    function setSelectedAbility(index, id) {
+        var input = document.getElementById(id);
+        input.value = index;
+    }
+
+</script>
+
+<ul class="nav nav-pills mb-3" id="staff-sergeant-abilities-tab-{{ character.id }}" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="ability-one-tab-{{ character.id }}" data-toggle="pill"
+           href="#ability-one-text-{{ character.id }}" role="tab" aria-controls="slug-shot-text-{{ character.id }}"
+           aria-selected="true" onclick="setSelectedAbility('1', 'ability-{{ character.id }}')">
+            Extra Conditioning
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="ability-two-tab-{{ character.id }}" data-toggle="pill"
+           href="#ability-two-text-{{ character.id }}" role="tab" aria-controls="electroshock-text-{{ character.id }}"
+           aria-selected="false" onclick="setSelectedAbility('2', 'ability-{{ character.id }}')">
+            Aggression
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="ability-three-tab-{{ character.id }}" data-toggle="pill"
+           href="#ability-three-text-{{ character.id }}" role="tab" aria-controls="lightning-reflexes-text-{{ character.id }}"
+           aria-selected="false" onclick="setSelectedAbility('3', 'ability-{{ character.id }}')">
+            Formidable
+        </a>
+    </li>
+</ul>
+<div class="tab-content" id="staff-sergeant-abilities-tabContent-{{ character.id }}">
+    <div class="tab-pane fade show active" id="ability-one-text-{{ character.id }}" role="tabpanel" aria-labelledby="slug-shot-tab-{{ character.id }}">
+        Run and Gun cooldown is reduced by one turn.
+    </div>
+    <div class="tab-pane fade" id="ability-two-text-{{ character.id }}" role="tabpanel" aria-labelledby="electroshock-tab-{{ character.id }}">
+        Gain +5 critical chance for each enemy you can see, up to a maximum of 30.
+    </div>
+    <div class="tab-pane fade" id="ability-three-text-{{ character.id }}" role="tabpanel" aria-labelledby="lightning-reflexes-tab-{{ character.id }}">
+        Your gear includes an extra layer of protection, granting two extra points of Ablative HP and 50% less damage from explosive attacks.
+    </div>
+</div>
+
+<input type="hidden" id="ability-{{ character.id }}" name="ability" value="1">
+<input type="hidden" name="character_id" value="{{ character.id }}">

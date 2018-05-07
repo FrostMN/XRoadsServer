@@ -1,0 +1,46 @@
+<script>
+
+    function setSelectedAbility(index, id) {
+        var input = document.getElementById(id);
+        input.value = index;
+    }
+
+</script>
+
+<ul class="nav nav-pills mb-3" id="sergeant-abilities-tab-{{ character.id }}" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="ability-one-tab-{{ character.id }}" data-toggle="pill"
+           href="#ability-one-text-{{ character.id }}" role="tab" aria-controls="slug-shot-text-{{ character.id }}"
+           aria-selected="true" onclick="setSelectedAbility('1', 'ability-{{ character.id }}')">
+            Aggression
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="ability-two-tab-{{ character.id }}" data-toggle="pill"
+           href="#ability-two-text-{{ character.id }}" role="tab" aria-controls="electroshock-text-{{ character.id }}"
+           aria-selected="false" onclick="setSelectedAbility('2', 'ability-{{ character.id }}')">
+            Center Mass
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="ability-three-tab-{{ character.id }}" data-toggle="pill"
+           href="#ability-three-text-{{ character.id }}" role="tab" aria-controls="lightning-reflexes-text-{{ character.id }}"
+           aria-selected="false" onclick="setSelectedAbility('3', 'ability-{{ character.id }}')">
+            Cool Under Pressure
+        </a>
+    </li>
+</ul>
+<div class="tab-content" id="sergeant-abilities-tabContent-{{ character.id }}">
+    <div class="tab-pane fade show active" id="ability-one-text-{{ character.id }}" role="tabpanel" aria-labelledby="slug-shot-tab-{{ character.id }}">
+        Gain +5 critical chance for each enemy you can see, up to a maximum of 30.
+    </div>
+    <div class="tab-pane fade" id="ability-two-text-{{ character.id }}" role="tabpanel" aria-labelledby="electroshock-tab-{{ character.id }}">
+        You do one additional point of base damage when using guns.
+    </div>
+    <div class="tab-pane fade" id="ability-three-text-{{ character.id }}" role="tabpanel" aria-labelledby="lightning-reflexes-tab-{{ character.id }}">
+        You gain +10 Aim on Overwatch and other reaction shots, and they can critically hit.
+    </div>
+</div>
+
+<input type="hidden" id="ability-{{ character.id }}" name="ability" value="1">
+<input type="hidden" name="character_id" value="{{ character.id }}">

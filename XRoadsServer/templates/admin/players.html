@@ -1,0 +1,112 @@
+{% for player in players %}
+
+<div class="card">
+    <div class="card-header">
+        {{ player.first_name }} {{ player.last_name }}
+    </div>
+    <div class="card-body">
+{#        <h5 class="card-title">Special title treatment</h5>#}
+{#        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>#}
+{#        <a href="#" class="btn btn-primary">Go somewhere</a>#}
+        <form id="update-{{ player.id }}" method="POST" action="{{ url_for('users.edit_user') }}">
+            <div class="row">
+                <div class="col d-flex justify-content-between align-items-center">
+                    Admin:
+                </div>
+                <div class="col">
+                    <select class="form-control" id="admin-{{ player.id }}" name="admin">
+                        {% if player.is_admin %}
+                            <option value="1" selected>Yes</option>
+                            <option value="0">No</option>
+                        {% else %}
+                            <option value="1">Yes</option>
+                            <option value="0" selected>No</option>
+                        {% endif %}
+                    </select>
+                </div>
+                <div class="col d-flex justify-content-between align-items-center">
+                    Verified:
+                </div>
+                <div class="col">
+                    <select class="form-control" id="verified-{{ player.id }}" name="verified">
+                        {% if player.is_verified %}
+                            <option value="1" selected>Yes</option>
+                            <option value="0">No</option>
+                        {% else %}
+                            <option value="1">Yes</option>
+                            <option value="0" selected>No</option>
+                        {% endif %}
+                    </select>
+                </div>
+                <div class="col d-flex justify-content-between align-items-center">
+                    Banned:
+                </div>
+                <div class="col">
+                    <select class="form-control" id="banned-{{ player.id }}" name="banned">
+                        {% if player.banned %}
+                            <option value="1" selected>Yes</option>
+                            <option value="0">No</option>
+                        {% else %}
+                            <option value="1">Yes</option>
+                            <option value="0" selected>No</option>
+                        {% endif %}
+                    </select>
+                </div>
+            <input type="hidden" name="user_id" value="{{ player.id }}">
+                <div class="col d-flex justify-content-between align-items-center">
+                    <button type="submit" class="btn btn-primary" form="update-{{ player.id }}">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </form>
+        <br>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-dark">Characters</li>
+            {% for char in player.characters %}
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-3 d-flex justify-content-between align-items-center">
+                            {{ char.character_name }}
+                        </div>
+                        <div class="col-2 d-flex justify-content-between align-items-center">
+                            {{ char.character_class }}
+                        </div>
+                        <div class="col-2 d-flex justify-content-between align-items-center">
+                            {{ char.rank }}
+                            <span class="badge badge-primary badge-pill">{{ char.ranks_available }}</span>
+                        </div>
+                        <div class="col-3">
+                            {% if char.rank_value == 8 %}
+                                <input class="form-control" type="text" placeholder="Maxed Level" readonly>
+                            {% else %}
+                                <form id="level_{{ player.id }}_{{ char.id_str }}"
+                                      action="{{ url_for("users.edit_char") }}" method="POST">
+                                    <select class="form-control" id="level-to-{{ char.id }}" name="rank">
+                                        <option value="0">None</option>
+                                        {% for r in range(8) %}
+                                            {% if r + 1 > char.rank_value %}
+                                                <option value="{{ (r + 1) - char.rank_value }}">{{ r | rank }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                    <input name="user_id" value="{{ char.id_str }}" type="hidden">
+                                    <input name="admin" value="true" type="hidden">
+                                </form>
+                            {% endif %}
+                        </div>
+                        <div class="col-1">
+                            <button type="submit" class="btn btn-primary" form="level_{{ player.id }}_{{ char.id_str }}">
+                                Level
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+</div>
+<br>
+
+{% endfor %}

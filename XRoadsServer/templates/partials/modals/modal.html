@@ -13,8 +13,33 @@
                 {% endblock %}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                {% if delete %}
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete_{{ char.id_str }}Modal">
+                        delete
+                    </button>
+                {% endif %}
+                {% if modalType == 'save' %}
+                    <button type="submit"
+                        {% if form_id %}
+                            form="{{ form_id }}"
+                        {% endif %}
+                        class="btn btn-primary">Save</button>
+                {% elif modalType == 'yes_no' %}
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <form action="{{ action }}" method="POST">
+                        <input type="hidden" name="{{ name }}" value="{{ value }}">
+                        <button type="submit" class="btn btn-primary">Yes</button>
+                    </form>
+                {% elif modalType == 'level' %}
+                    <button type="submit"
+                        {% if form_id %}
+                            form="{{ form_id }}"
+                        {% endif %}
+                        class="btn btn-primary">Level</button>
+                {% else %}
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -1,0 +1,9 @@
+{% extends 'partials/modals/modal.html' %}
+{% block modal_body %}
+<form id="edit_email" action="{{ url_for('users.edit_email') }}" method="POST">
+    <div class="form-group">
+        <label for="newEmail1">New Email:</label>
+        <input type="text" name="new_email" class="form-control" id="newEmail" aria-describedby="emailHelp" placeholder="email">
+    </div>
+</form>
+{% endblock %}

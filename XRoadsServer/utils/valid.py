@@ -1,6 +1,13 @@
 # import XRoadsServer.utils.database.users as db_users
 
 
+# TODO: need to implement this
+def email(email_str: str) -> bool:
+    if email_str:
+        return True
+    return True
+
+
 def new_user(request_data: dict) -> bool:
     # user_name = request_data["user_name"]
     # email = request_data["email"]

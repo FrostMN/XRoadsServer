@@ -1,0 +1,6 @@
+{% extends 'partials/modals/modal.html' %}
+{% block modal_body %}
+<form id="edit_char" action="{{ url_for('users.edit_char') }}" method="POST">
+    Are you sure you want to delete {{ char.character_name }}? This cannot be undone!
+</form>
+{% endblock %}

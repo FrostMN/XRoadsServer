@@ -1,0 +1,19 @@
+{% extends 'partials/modals/modal.html' %}
+{% block modal_body %}
+<form id="new_char" action="{{ url_for('users.add_char') }}" method="POST">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Character Name:</label>
+        <input type="text" name="name" class="form-control" id="newCharacterName" aria-describedby="emailHelp" placeholder="Name">
+    </div>
+    <div class="form-group">
+        <label for="newCharacterBackground">Background:</label>
+        <select class="form-control" id="newCharacterBackground" name="background">
+            <option value="res">Resistance</option>
+            <option value="sci">Scientist</option>
+            <option value="sca">Scavenger</option>
+            <option value="hun">Hunter</option>
+            <option value="ath">Athlete</option>
+        </select>
+    </div>
+</form>
+{% endblock %}
