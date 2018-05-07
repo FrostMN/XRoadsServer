@@ -4,6 +4,10 @@ import os
 _basedir = os.path.abspath(os.path.dirname(__file__))
 
 
+sql_user = "xroads_user"
+sql_password = os.getenv("XROADS_PASSWORD")
+
+
 # Creates the default Config Object
 class Config(object):
     # APP Settings
@@ -16,8 +20,8 @@ class Config(object):
     # Database Config
     MYSQL_HOST = "localhost"
     MYSQL_PORT = "3306"
-    MYSQL_USER = "xroads_user"
-    MYSQL_PASSWORD = os.getenv("XROADS_PASSWORD")
+    MYSQL_USER = sql_user
+    MYSQL_PASSWORD = sql_password
     MYSQL_DB = "xroads"
     MYSQL_TEMPLATE = "mysql://{}:{}@{}:{}/{}"
 
@@ -50,8 +54,14 @@ class TestingConfig(Config):
     TESTING = True
 
     # database configuration
+
+    MYSQL_HOST = "localhost"
+    MYSQL_PORT = "3306"
+    MYSQL_USER = sql_user
+    MYSQL_PASSWORD = sql_password
     MYSQL_DB = "xroads_test"
-    pass
+    MYSQL_TEMPLATE = "mysql://{}:{}@{}:{}/{}"
+    MYSQL_CONN = MYSQL_TEMPLATE.format(MYSQL_USER, MYSQL_PASSWORD, MYSQL_HOST, MYSQL_PORT, MYSQL_DB)
 
 
 del os

@@ -86,7 +86,7 @@ def load_db():
 
     for u in data.users:
         hashed = hash_password(u[1])
-        user_args = (u[0].user_id, u[0].user_name, u[0].email, 1, None, u[0].admin, u[0].first_name, u[0].last_name, hashed)
+        user_args = (u[0].id, u[0].user_name, u[0].email, 1, None, u[0].admin, u[0].first_name, u[0].last_name, hashed)
         execute_query(user_qry, user_args)
 
     for c in data.characters:

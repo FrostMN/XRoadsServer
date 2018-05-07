@@ -5,9 +5,9 @@ from XRoadsServer.models.CharacterClasses import *
 from XRoadsServer.models.Weapons import *
 
 users = [
-    (User('asouer',  'asouer@gmail.com',    1, None, 1, 'Aaron',   'Souer'),    "test_pw_1"),
-    (User('spyndri', 'spyndri@gmail.com',   1, None, 0, 'Willson', 'Borchert'), "test_pw_2"),
-    (User('mlubke',  'MikeLubke@gmail.com', 1, None, 0, 'Mike',    'Lubke'),    "test_pw_3"),
+    (User('asouer',  'aaron@asouer.com',    True, None, True,  'Aaron',   'Souer',    1), "test_pw_1"),
+    (User('spyndri', 'spyndri@gmail.com',   True, None, False, 'Willson', 'Borchert', 2), "test_pw_2"),
+    (User('mlubke',  'MikeLubke@gmail.com', True, None, False, 'Mike',    'Lubke',    3), "test_pw_3"),
 ]
 
 characters = [

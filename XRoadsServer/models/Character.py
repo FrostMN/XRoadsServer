@@ -116,6 +116,9 @@ class Character(object):
                 if isinstance(utility, Utility):
                     self._utility.append(utility)
 
+    def __eq__(self, other):
+        return self.character_name == other.character_name
+
     # TODO: these getters need to be finished and maybe corrected
     def get_aim(self, weapon: Weapon=None, range: Union[Range, int]=None):
         if isinstance(range, int):

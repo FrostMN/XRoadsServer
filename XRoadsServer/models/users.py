@@ -36,10 +36,10 @@ class User(object):
 
     def __eq__(self, other):
         """ Override the default Equals behavior """
-        return self.user_id == other.user_id \
+        return self.user_id == other.id \
             and self.email == other.email \
             and self._admin == other.admin \
-            and self._email_confirmed == other.email_confirmed \
+            and self._email_confirmed == other.confirmed \
             and self.first_name == other.first_name \
             and self.last_name == other.last_name
 
