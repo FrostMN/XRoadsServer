@@ -19,6 +19,7 @@
 ![alt text](https://github.com/asouer/XRoadsServer/blob/master/read_me_pix/09.png "Admin Screen: Games")
 ## Admin Screen: Players - Leveling a Character
 ![alt text](https://github.com/asouer/XRoadsServer/blob/master/read_me_pix/11.png "Players - Leveling a Character")
-![alt text](https://github.com/asouer/XRoadsServer/blob/master/read_me_pix/12.png "Log in Screen")
+## Admin Screen: Games - Game Screen
+![alt text](https://github.com/asouer/XRoadsServer/blob/master/read_me_pix/12.png "Admin Screen: Games - Game Screen")
 
 
