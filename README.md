@@ -1,5 +1,26 @@
 # XRoadsServer
 
+This is a web app to facilitate the math for a LARP game.
+
+In order to deploy this you need to have a mysql server set up with the following configuration
+
+database name = xroads
+
+database user = xroads_user
+
+database password = $MAKE_ONE_UP 
+
+then set an envrionmant var named:
+
+XROADS_PASSWORD
+
+in order for the mailer to work you need to set up a gmail account with the following envrionment vars set for it:
+
+XROADS_MAIL_USER = "xroads.email.test@gmail.com" <- whatever account name you made
+
+XROADS_MAIL_PWORD = "gmail_app_password" <- you need to enact 2nd factor auth and create an app password in gmail
+
+
 ## Home Screen
 ![alt text](https://github.com/asouer/XRoadsServer/blob/master/read_me_pix/01.png "Home Screen")
 ## Players Screen: Characters
