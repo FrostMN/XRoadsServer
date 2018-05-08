@@ -14,9 +14,11 @@
 ![alt text](https://github.com/asouer/XRoadsServer/blob/master/read_me_pix/06.png "Players Screen: User - Character Leveling")
 ![alt text](https://github.com/asouer/XRoadsServer/blob/master/read_me_pix/07.png "Players Screen: User - Leveling 2")
 ## Admin Screen: Players
-![alt text](https://github.com/asouer/XRoadsServer/blob/master/read_me_pix/08.png "Log in Screen")
-![alt text](https://github.com/asouer/XRoadsServer/blob/master/read_me_pix/09.png "Log in Screen")
-![alt text](https://github.com/asouer/XRoadsServer/blob/master/read_me_pix/11.png "Log in Screen")
+![alt text](https://github.com/asouer/XRoadsServer/blob/master/read_me_pix/08.png "Admin Screen: Players")
+## Admin Screen: Games - Work in Progress -
+![alt text](https://github.com/asouer/XRoadsServer/blob/master/read_me_pix/09.png "Admin Screen: Games")
+## Admin Screen: Players - Leveling a Character
+![alt text](https://github.com/asouer/XRoadsServer/blob/master/read_me_pix/11.png "Players - Leveling a Character")
 ![alt text](https://github.com/asouer/XRoadsServer/blob/master/read_me_pix/12.png "Log in Screen")
 
 
