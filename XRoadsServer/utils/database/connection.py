@@ -9,12 +9,6 @@ sql_pwd = config.MYSQL_PASSWORD
 sql_usr = config.MYSQL_USER
 sql_db = config.MYSQL_DB
 
-# sql_host = config.MYSQL_HOST
-# sql_port = int(config.MYSQL_PORT)
-# sql_pwd = config.MYSQL_PASSWORD
-# sql_usr = config.MYSQL_USER
-# sql_db = config.MYSQL_DB
-
 db = MySQLdb.connect(host=sql_host, port=sql_port, user=sql_usr, passwd=sql_pwd, db=sql_db)
 
 

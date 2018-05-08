@@ -261,9 +261,3 @@ class Technical(CharacterClass):
 
     def get_hack_mod(self, rank: Rank):
         return super().get_hack_mod(rank)
-
-
-if __name__ == '__main__':
-    # print(health_slow(Rank.Squaddie))
-
-    print(Sharpshooter().get_offence_mod(Rank.Corporal))

@@ -55,9 +55,7 @@ def game_ko_api():
 
     player_two = Character(Scientist(), player_name="Willson Borchert", character_name="Spyndri",
                            primary_weapon=Shotgun())
-    player_thr = Character(Scientist(), player_name="Mike Lubke", character_name="Kaine",
-                           primary_weapon=Shotgun())
 
-    game_data = {"players": [player_one.to_dict(), player_two.to_dict()]} #, player_thr.to_json()]}
+    game_data = {"players": [player_one.to_dict(), player_two.to_dict()]}
 
     return jsonify(game_data)

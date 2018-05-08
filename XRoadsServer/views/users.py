@@ -8,7 +8,6 @@ from XRoadsServer.enums.Ranks import Rank
 mod = Blueprint('users', __name__)
 
 
-# @user.logged_in
 @mod.route('/')
 def user():
     if "logged_in" in session.keys():

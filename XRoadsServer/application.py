@@ -14,6 +14,5 @@ def get_rank_name(number: Union[int, str]):
     return Rank(number + 1).name
 
 
-# app.add_template_filter(Rank)
 app.jinja_env.filters['rank'] = get_rank_name
 
